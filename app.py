@@ -18,25 +18,20 @@ model_C = pickle.load(pickle_in)
 model_R = pickle.load(R_pickle_in)
 
 # Data retrieved from DB using mongoconnection module
-try:
-    dbcon = mongodbconnection(username='mongodb', password='12345')
-    list_cursor = dbcon.getdata(dbName='FireDataML', collectionName='ml_task')
-    log.info('Connected to Mongodb and data retrieved')
-except Exception as e:
-    log.error('Error in Connection to Mongo DB', e)
+dbcon = mongodbconnection(username='mongodb', password='12345')
+list_cursor = dbcon.getdata(dbName='FireDataML', collectionName='ml_task')
+log.info('Connected to Mongodb and data retrieved')
 
 # Data From MongoDB is used for Standardization
-try:
-    df = pd.DataFrame(list_cursor)
-    df.drop('_id', axis=1, inplace=True)
-    log.info('DataFrame created')
-    scaler = StandardScaler()
-    X = df.drop(['FWI', 'Classes'], axis=1)
-    # Standardize
-    X_reg_scaled = scaler.fit_transform(X)
-    log.info('Standardization done')
-except Exception as e:
-    log.error('Error in Data Preprocessing Operations', e)
+df = pd.DataFrame(list_cursor)
+df.drop('_id', axis=1, inplace=True)
+log.info('DataFrame created')
+scaler = StandardScaler()
+X = df.drop(['FWI', 'Classes'], axis=1)
+# Standardize
+X_reg_scaled = scaler.fit_transform(X)
+log.info('Standardization done')
+ 
 
 
 # Route for homepage
@@ -54,7 +49,6 @@ def predict_api():
         print(data)
         log.info('Input from Api testing', data)
         new_data = [list(data.values())]
-        scaler = StandardScaler()
         final_data = scaler.transform(new_data)
         output = int(model_C.predict(final_data)[0])
         if output == 1:
@@ -74,7 +68,6 @@ def predict():
     try:
         data = [float(x) for x in request.form.values()]
         final_features = [np.array(data)]
-        scaler = StandardScaler()
         final_features = scaler.transform(final_features)
         output = model_C.predict(final_features)[0]
         log.info('Prediction done for Classification model')
@@ -94,7 +87,6 @@ def predictR():
     try:
         data = [float(x) for x in request.form.values()]
         data = [np.array(data)]
-        scaler = StandardScaler()
         data = scaler.transform(data)
         output = model_R.predict(data)[0]
         log.info('Prediction done for Regression model')
