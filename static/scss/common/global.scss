@@ -1,0 +1,49 @@
+a:focus, a:active { text-decoration: none; outline: none; @include transition(all 300ms ease 0s); }
+input, select, textarea { outline: none; @include appearance( unset ); }
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    @include appearance( none );
+    margin: 0;
+}
+input:focus, select:focus, textarea:focus { outline: none; @include box-shadow-input(none); }
+input[type=checkbox] { @include appearance( checkbox ); }
+input[type=radio] { @include appearance( radio ); }
+img { max-width: 100%; height: auto; }
+figure { margin: 0; }
+p { margin-bottom: 0px; }
+h1 { 
+    line-height: 1.8; 
+    margin: 0; 
+    padding: 0;
+    font-weight: bold; 
+    color: #fff;
+    font-family: Poppins;
+    font-size: 21px;
+    text-align: center;
+    margin-bottom: 28px;
+}
+.clear { clear: both; }
+body {
+	font-size: 14px;
+    line-height: 1.8;
+    color: #fff;
+    background-image: url('../images/form-img.jpg');
+    background-repeat: no-repeat;
+    @include background-size(cover);
+    background-position: center center;
+    font-weight: 600;
+    font-family: Poppins;
+    margin: 0px;
+    // padding: 150px 0;
+}
+.main {
+    
+    position: relative;
+}
+.container {
+    width: 960px;
+    background: rgba(11,13,24, 0.6);
+    margin: 265px auto;
+    @include border-radius(10px);
+}
+  
+

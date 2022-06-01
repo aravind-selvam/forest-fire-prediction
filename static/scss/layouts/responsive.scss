@@ -1,0 +1,23 @@
+//end 1200px
+@media screen and (max-width: 1200px) {
+
+}
+@media screen and (max-width: 768px) {
+    .container {
+        width: calc( 100% - 30px);
+        max-width: 100%;
+    }
+    .form-group {
+        @include flex-direction(column);
+    }
+    .form-destination, .form-date-from, .form-date-to, .form-quantity {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+//end 575px
+@media screen and (max-width: 480px) {
+    .booking-form {
+        padding: 35px 30px 51px 30px;
+    }
+}

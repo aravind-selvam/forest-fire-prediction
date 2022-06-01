@@ -1,0 +1,104 @@
+.booking-form {
+    padding: 35px 70px 51px 70px;
+}
+.header {
+    @extend display-flex;
+    @include align-items(center);
+    @include justify-content(space-between);
+    padding: 50px 57px;
+}
+input {
+    border : none;
+    background: #fff;
+    @include border-radius(5px);
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: $black-color;
+    display: block;
+    font-family: Poppins;
+    position: relative;
+    z-index: 9;
+	&::-webkit-input-placeholder {
+		color: $grey-light;
+	}
+	&::-moz-placeholder {
+		color: $grey-light;
+	}
+	&:-ms-input-placeholder {
+		color: $grey-light;
+	}
+	&:-moz-placeholder {
+		color: $grey-light;
+	}
+}
+.submit {
+    background: $yellow-color;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 23px;
+    padding: 15px 20px;
+    cursor: pointer;
+    &:hover {
+        background-color: darken($yellow-color, 10%);
+    }
+}
+label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    display: block;
+}
+
+#quantity {
+    color: $grey-light;
+}
+.form-group {
+    @extend display-flex;
+    @include align-items(center);
+    @include justify-content(space-between);
+}
+.form-destination {
+    width: 230px;
+}
+.form-date-from, .form-date-to {
+    width: 155px;
+}
+.form-quantity {
+    width: 80px;
+    position: relative;
+}
+.form-submit {
+    width: 140px;
+}
+.modify-qty {
+    position: absolute;
+    right: 12px;
+    font-size: 18px;
+    color: $grey-light;
+    z-index: 99;
+    cursor: pointer;
+}
+.plus {
+    top: 23px;
+}
+.minus {
+    bottom: 0px;
+}
+.form-icon {
+    position: relative;
+}
+.ui-datepicker-trigger {
+    position: absolute;
+    right: 16px;
+    top: 40px;
+    color: #999;
+    font-size: 16px;
+    z-index: 99;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

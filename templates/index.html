@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forest Fire Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='fonts/material-icon/css/material-design-iconic-font.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='vendor/jquery-ui/jquery-ui.min.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css')}}">
+</head>
+<body>
+
+    <div class="main">
+        
+        <div class="header">
+            <img src="{{ url_for('static', filename = 'images/header-text.png')}}" alt="">
+            <h1>ALGERIAN FOREST FIRE PREDICTION</h1>
+            <img src="{{ url_for('static', filename = 'images/dots.png')}}" alt="">
+        </div>
+        <h2>Project by Aravind S
+        	<div class="contact-details" >
+				<a href="https://github.com/aravind9722" rel="noopener noreferrer"
+					target="_blank"
+				>
+					<img src="{{ url_for('static',filename='images/Github.png') }}" />
+				</a>
+                <a href="https://www.linkedin.com/in/aravind-selvam/" rel="noopener noreferrer"
+                   target="_blank"
+				>
+					<img src="{{ url_for('static',filename='images/linkedin.png') }}" />
+				</a>
+			</div>
+        </h2>
+        <div class="container">
+            <h3>Fire Prediction (Classification Model) </h3>
+            <form action="{{ url_for('predict')}}" id="booking-form" class="booking-form" method="POST">
+                <div class="form-group">
+                    <div class="form-Temperature">
+                        <label for="Temperature">Temperature</label>
+                        <input type="number" id="Temperature" name="Temperature" placeholder="Temperature" />
+                    </div>
+                    <div class="form-Ws">
+                        <label for="Ws">WindSpeed</label>
+                        <input type="number" id="Ws" name="Ws" placeholder="Wind speed" />
+                    </div>
+                    <div class="form-FFMC">
+                        <label for="FFMC"> Fuel Moisture Code </label>
+                        <input type="number" id="FFMC" name="FFMC" placeholder="FFMC" />
+                    </div>
+                    <div class="form-DMC">
+                        <label for="DMC">Duff Moisture Code</label>
+                        <input type="number" id="DMC" name="DMC" placeholder="DMC" />
+                    </div>
+                    <div class="form-ISI">
+                        <label for="ISI">Initial Spread Index </label>
+                        <input type="number" id="ISI" name="ISI" placeholder="ISI" />
+                    </div>
+                    <div class="form-submit">
+                        <input type="submit" id="submit" class="submit" value="Predict" />
+                    </div>
+                </div>
+                          {{prediction_text1}}
+            </form>
+        </div>
+        <div class="container">
+            <h3>Fire Weather Index Prediction (Regression Model) </h3>
+            <form action="{{ url_for('predictR')}}" id="Reg_form" class="booking-form" method="POST">
+                <div class="form-group">
+                    <div>
+                        <label for="Temperature1">Temperature</label>
+                        <input type="text" id="Temperature1" name="Temperature" placeholder="Temperature" />
+                    </div>
+                    <div>
+                        <label for="Wind_speed">Windspeed</label>
+                        <input type="text" id="Wind_speed" name="Wind_speed" placeholder="Wind speed" />
+                    </div>
+                    <div>
+                        <label for="FFMC1">Fuel Moisture Code</label>
+                        <input type="text" id="FFMC1" name="FFMC" placeholder="FFMC" />
+                    </div>
+                    <div>
+                        <label for="DMC1">Duff Moisture Code</label>
+                        <input type="text" id="DMC1" name="DMC1" placeholder="DMC" />
+                    </div>
+                    <div>
+                        <label for="ISI1">Initial Spread Index</label>
+                        <input type="text" id="ISI1" name="ISI1" placeholder="ISI" />
+                    </div>
+                    <div class="form-submit">
+                        <input type="submit" id="submitR" class="submit" value="Predict" />
+                    </div>
+                </div>
+                          {{prediction_text2}}
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>
