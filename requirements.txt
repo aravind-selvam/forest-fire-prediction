@@ -1,8 +1,8 @@
 Flask==2.1.0
 numpy
 pandas
-pymongo==4.1.1
+pymongo
 scikit_learn==1.1.1
 gunicorn
 xgboost
-pymongo[srv]==3.11
+pymongo[srv]
