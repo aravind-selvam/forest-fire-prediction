@@ -1,5 +1,5 @@
 import pickle, bz2
-from flask import Flask, request, jsonify, url_for, render_template
+from flask import Flask, request, jsonify, render_template
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
@@ -21,6 +21,7 @@ model_R = pickle.load(R_pickle_in)
 try:
     dbcon = mongodbconnection(username='mongodb', password='12345')
     list_cursor = dbcon.getdata(dbName='FireDataML', collectionName='ml_task')
+    log.info('Connected to Mongodb and data retrieved')
 except Exception as e:
     log.error('Error in Connection to Mongo DB', e)
 
@@ -62,7 +63,7 @@ def predict_api():
         return jsonify(text, output)
     except Exception as e:
         output = 'Check the in input again!'
-        log.error('error in input from Postman',e)
+        log.error('error in input from Postman', e)
         return jsonify(output)
 
 
@@ -74,11 +75,12 @@ def predict():
         final_features = [np.array(data)]
         final_features = scaler.transform(final_features)
         output = model_C.predict(final_features)[0]
+        log.info('Prediction done for Classification model')
         if output == 0:
             text = 'Forest is Safe!'
         else:
             text = 'Forest is in Danger!'
-        return render_template('index.html', prediction_text1="{} , Chance of Fire is {}".format(text, output))
+        return render_template('index.html', prediction_text1="{} --- Chance of Fire is {}".format(text, output))
     except Exception as e:
         log.error('Input error, check input', e)
         return render_template('index.html', prediction_text1="Check the Input again!!!")
@@ -92,7 +94,11 @@ def predictR():
         data = [np.array(data)]
         data = scaler.transform(data)
         output = model_R.predict(data)[0]
-        return render_template('index.html', prediction_text2="Fuel Moisture Code index is {:.4f}, Above 15 is consider High hazard rating".format(output))
+        log.info('Prediction done for Regression model')
+        if output > 15:
+            return render_template('index.html', prediction_text2="Fuel Moisture Code index is {:.4f} ---- Warning!!! High hazard rating".format(output))
+        else:
+            return render_template('index.html', prediction_text2="Fuel Moisture Code index is {:.4f} ---- Safe.. Low hazard rating".format(output))
     except Exception as e:
         log.error('Input error, check input', e)
         return render_template('index.html', prediction_text2="Check the Input again!!!")
