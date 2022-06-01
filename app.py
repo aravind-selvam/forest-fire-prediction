@@ -54,6 +54,7 @@ def predict_api():
         print(data)
         log.info('Input from Api testing', data)
         new_data = [list(data.values())]
+        scaler = StandardScaler()
         final_data = scaler.transform(new_data)
         output = int(model_C.predict(final_data)[0])
         if output == 1:
@@ -73,6 +74,7 @@ def predict():
     try:
         data = [float(x) for x in request.form.values()]
         final_features = [np.array(data)]
+        scaler = StandardScaler()
         final_features = scaler.transform(final_features)
         output = model_C.predict(final_features)[0]
         log.info('Prediction done for Classification model')
@@ -92,6 +94,7 @@ def predictR():
     try:
         data = [float(x) for x in request.form.values()]
         data = [np.array(data)]
+        scaler = StandardScaler()
         data = scaler.transform(data)
         output = model_R.predict(data)[0]
         log.info('Prediction done for Regression model')
