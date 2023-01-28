@@ -1,5 +1,7 @@
 import pymongo
-class mongodbconnection :
+
+
+class mongodbconnection:
     # This class shall be used for mongoDB operation
     def __init__(self, username, password):
         try:

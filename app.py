@@ -1,4 +1,5 @@
-import pickle, bz2
+import pickle
+import bz2
 from flask import Flask, request, jsonify, render_template
 import numpy as np
 import pandas as pd
@@ -12,8 +13,8 @@ warnings.filterwarnings("ignore")
 app = Flask(__name__)
 
 # Import Classification and Regression model file
-pickle_in = bz2.BZ2File('classification.pkl', 'rb')
-R_pickle_in = bz2.BZ2File('regression.pkl', 'rb')
+pickle_in = bz2.BZ2File('model/classification.pkl', 'rb')
+R_pickle_in = bz2.BZ2File('model/regression.pkl', 'rb')
 model_C = pickle.load(pickle_in)
 model_R = pickle.load(R_pickle_in)
 
@@ -31,7 +32,6 @@ X = df.drop(['FWI', 'Classes'], axis=1)
 # Standardize
 X_reg_scaled = scaler.fit_transform(X)
 log.info('Standardization done')
- 
 
 
 # Route for homepage
@@ -101,4 +101,4 @@ def predictR():
 
 # Run APP in Debug mode
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
